@@ -3,6 +3,9 @@ import MainLayout from "../layouts/MainLayout";
 import DashboardPage from "../pages/dashboard/DashboardPage";
 import LoginPage from "../pages/auth/LoginPage";
 import ProtectedRoute from "../components/ProtectedRoute";
+import ExistenciasPage from "../pages/inventario/ExistenciasPage";
+import ProductosPage from "../pages/productos/ProductosPage";
+
 
 function AppRouter() {
   return (
@@ -30,6 +33,10 @@ function AppRouter() {
               <Route path="/inventario" element={<InventarioPage />} />
               etc.
           */}
+          <Route path="/inventario/existencias" element={<ExistenciasPage />} />
+          <Route path="/productos" element={<ProductosPage />} />
+
+
         </Route>
 
         {/* Cualquier otra ruta redirige al dashboard */}

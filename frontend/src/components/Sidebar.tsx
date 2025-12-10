@@ -26,8 +26,11 @@ Dashboard
 <Link style={linkStyle} to="/compras">
 Compras
 </Link>
-<Link style={linkStyle} to="/inventario">
-Inventario / Kardex
+<Link style={linkStyle} to="/inventario/existencias">
+Inventario / Existencias
+</Link>
+<Link style={linkStyle} to="/productos">
+  Productos
 </Link>
 <Link style={linkStyle} to="/clientes">
 Clientes
