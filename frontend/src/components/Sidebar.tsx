@@ -32,6 +32,9 @@ Inventario / Existencias
 <Link style={linkStyle} to="/productos">
   Productos
 </Link>
+<Link style={linkStyle} to="/bodegas">
+  Bodegas
+</Link>
 <Link style={linkStyle} to="/clientes">
 Clientes
 </Link>

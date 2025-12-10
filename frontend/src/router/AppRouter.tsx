@@ -5,6 +5,8 @@ import LoginPage from "../pages/auth/LoginPage";
 import ProtectedRoute from "../components/ProtectedRoute";
 import ExistenciasPage from "../pages/inventario/ExistenciasPage";
 import ProductosPage from "../pages/productos/ProductosPage";
+import BodegasPage from "../pages/bodegas/BodegasPage";
+
 
 
 function AppRouter() {
@@ -35,6 +37,8 @@ function AppRouter() {
           */}
           <Route path="/inventario/existencias" element={<ExistenciasPage />} />
           <Route path="/productos" element={<ProductosPage />} />
+          <Route path="/bodegas" element={<BodegasPage />} />
+
 
 
         </Route>
