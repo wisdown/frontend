@@ -24,7 +24,7 @@ ERP LomaLinda
 Dashboard
 </Link>
 <Link style={linkStyle} to="/compras">
-Compras
+Compras / Ingreso a Bodega
 </Link>
 <Link style={linkStyle} to="/inventario/existencias">
 Inventario / Existencias
