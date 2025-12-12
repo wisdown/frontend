@@ -10,7 +10,7 @@ import {
   type CompraItemIn,
 } from "../../api/comprasApi";
 import { listarBodegas, type Bodega } from "../../api/bodegasApi";
-import { listarProveedores, type Proveedor } from "../../api/proveedoresApi";
+import { listarProveedores, type ProveedoresPaginadosResponse } from "../../api/proveedoresApi";
 import { listarProductos, type Producto } from "../../api/productosApi";
 
 // ---------------------------------------------------------------------------
@@ -57,7 +57,8 @@ function ComprasPage() {
   const [cabecera, setCabecera] = useState<CompraCabeceraForm>(emptyCabecera);
   const [items, setItems] = useState<CompraItemForm[]>([emptyItem]);
 
-  const [proveedores, setProveedores] = useState<Proveedor[]>([]);
+  const [proveedores, setProveedores] = useState<ProveedoresPaginadosResponse | null>(null);
+  /* const [proveedores, setProveedores] = useState<Proveedor[]>([]); */
   const [bodegas, setBodegas] = useState<Bodega[]>([]);
   const [productos, setProductos] = useState<Producto[]>([]);
 
@@ -305,7 +306,7 @@ function ComprasPage() {
                   style={inputStyle}
                 >
                   <option value="">Seleccione proveedor</option>
-                  {proveedores.map((p) => (
+                  {proveedores.results.map((p) => (
                     <option key={p.id} value={p.id}>
                       {p.nombre}
                     </option>
