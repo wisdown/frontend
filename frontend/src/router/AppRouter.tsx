@@ -7,6 +7,7 @@ import ExistenciasPage from "../pages/inventario/ExistenciasPage";
 import ProductosPage from "../pages/productos/ProductosPage";
 import BodegasPage from "../pages/bodegas/BodegasPage";
 import ComprasPage from "../pages/compras/ComprasPage";
+import ProveedoresPage from "../pages/proveedores/ProveedoresPage";
 
 
 
@@ -41,6 +42,7 @@ function AppRouter() {
           <Route path="/productos" element={<ProductosPage />} />
           <Route path="/bodegas" element={<BodegasPage />} />
            <Route path="/compras" element={<ComprasPage />} />
+           <Route path="/proveedores" element={<ProveedoresPage />} />
 
 
 

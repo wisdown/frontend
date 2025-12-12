@@ -1,21 +1,17 @@
 // src/api/proveedoresApi.ts
-// Capa de acceso a la API para el módulo de Proveedores (CRUD básico)
-
 import { httpClient } from "./httpClient";
 
-// ---------------------------------------------------------------------------
-// Tipos
-// ---------------------------------------------------------------------------
+export type EstadoProveedor = "ACTIVO" | "INACTIVO";
 
 export interface Proveedor {
   id: number;
   nombre: string;
   nit?: string | null;
-  estado?: string | null;      // lo agregamos porque viene en el JSON
-  telefono?: string | null;
+  cui?: string | null;
   direccion?: string | null;
+  telefono?: string | null;
   email?: string | null;
-  activo?: boolean;            // opcional, por si más adelante lo manejas así
+  estado?: EstadoProveedor;
 }
 
 export interface ProveedoresPaginadosResponse {
@@ -28,52 +24,51 @@ export interface ProveedoresPaginadosResponse {
 export interface ProveedorFormValues {
   nombre: string;
   nit?: string;
-  telefono?: string;
+  cui?: string;
   direccion?: string;
+  telefono?: string;
   email?: string;
-  activo?: boolean;
+  estado?: EstadoProveedor; // IMPORTANTE
 }
 
-// Ruta real según tu backend:
+// Endpoint real (confirmado)
 const BASE_URL = "/api/v1/catalogos/proveedores/";
 
-// ---------------------------------------------------------------------------
-// Funciones API
-// ---------------------------------------------------------------------------
-
-/**
- * Lista proveedores. Versión actual: backend devuelve un objeto paginado,
- * así que aquí devolvemos sólo `results` al frontend.
- */
-export async function listarProveedores(): Promise<Proveedor[]> {
-  const resp = await httpClient.get<ProveedoresPaginadosResponse>(BASE_URL);
-  return resp.data.results;   // ⬅️ AQUÍ ESTÁ LA CLAVE
+export async function listarProveedores(params?: {
+  search?: string;
+  page?: number;
+}): Promise<ProveedoresPaginadosResponse> {
+  const resp = await httpClient.get<ProveedoresPaginadosResponse>(BASE_URL, { params });
+  return resp.data;
 }
 
-/**
- * Crea un proveedor.
- */
-export async function crearProveedor(
-  data: ProveedorFormValues
-): Promise<Proveedor> {
+export async function crearProveedor(data: ProveedorFormValues): Promise<Proveedor> {
   const resp = await httpClient.post<Proveedor>(BASE_URL, data);
   return resp.data;
 }
 
-/**
- * Actualiza un proveedor existente.
- */
 export async function actualizarProveedor(
   id: number,
   data: ProveedorFormValues
 ): Promise<Proveedor> {
+  // PUT completo (según tu backend)
   const resp = await httpClient.put<Proveedor>(`${BASE_URL}${id}/`, data);
   return resp.data;
 }
 
-/**
- * Desactiva o elimina un proveedor (según implemente tu backend).
- */
+// “Eliminar suave” = cambiar estado
 export async function desactivarProveedor(id: number): Promise<void> {
-  await httpClient.delete(`${BASE_URL}${id}/`);
+  await httpClient.patch(`${BASE_URL}${id}/`, { estado: "INACTIVO" });
+}
+
+
+// (Opcional) reactivar
+export async function activarProveedor(id: number): Promise<void> {
+  await httpClient.patch(`${BASE_URL}${id}/`, { estado: "ACTIVO" });
+}
+
+
+export async function obtenerProveedor(id: number): Promise<Proveedor> {
+  const resp = await httpClient.get<Proveedor>(`${BASE_URL}${id}/`);
+  return resp.data;
 }
